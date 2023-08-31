@@ -1,0 +1,92 @@
+type BoardGame {
+    id: ID!
+    title: String!
+    createdAt: String
+    publishYear: String
+    publisher: String
+    isBaseGame: Boolean
+    descriptionShort: String
+    descriptionLong: String
+    imageUrl: String
+    hiresImageUrl: String
+    playersMax: Int
+    playersMin: Int
+    playtimeMax: Int
+    playtimeMin: Int
+    genre: String
+    rating: Int
+    relatedEvents: [Event]!
+    playerbase: [User]!
+}
+
+type Event {
+    id: ID!
+    title: String!
+    createdAt: String!
+    userId: String!
+    description: String
+    location: String
+    startDateTime: String
+    endDateTime: String
+    attendees: [User]!
+    comments: [Comment]!
+    boardGamesToBePlayed: [BoardGame]!
+    # isHost: Boolean!
+    # isCancelled: Boolean!
+    # category: Category!
+    # categoryId: ID!
+    # host: User!
+    # hostId: ID!
+    # isGoingCount: Int!
+}
+
+type Comment {
+    id: ID!
+    text: String!
+    createdAt: String!
+    userId: String!
+    userEmail: String!
+}
+
+type User {
+    id: ID!
+    email: String!
+    firstName: String!
+    token: String!
+    lastName: String!
+    createdAt: String!
+    joinedEvents: [Event]!
+    playedBoardGames: [BoardGame]!
+}
+
+input RegisterInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    confirmPassword: String!
+}
+
+
+type Query {
+    getEvents: [Event]
+    getEvent(eventId: ID!): Event
+    getBoardGames: [BoardGame]
+    getBoardGame(boardGameId: ID!): BoardGame
+}
+
+type Mutation {
+    register(registerInput: RegisterInput): User!
+    login(email: String!, password: String!): User!
+    googleLogin(idToken: String!): User!
+    joinPlayerbase(boardGameId: ID!): BoardGame!
+    leavePlayerbase(boardGameId: ID!): BoardGame!
+    createEvent(title: String!, description: String, location: String,
+        startDateTime: String, endDateTime: String, boardGamesToBePlayed: [String]): Event!
+    updateEvent(eventId: ID!, title: String, description: String, location: String,
+        startDateTime: String, endDateTime: String, boardGamesToBePlayed: [String]): Event!
+    deleteEvent(eventId: ID!): Event!
+    joinEvent(eventId: ID!): Event!
+    createComment(eventId: ID!, text: String!): Event!
+    deleteComment(eventId: ID! commentId: ID!): Event!
+}

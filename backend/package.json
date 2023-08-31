@@ -1,0 +1,44 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "yarn clean && yarn build-babel",
+    "start": "yarn build && node ./build/server.js",
+    "test": "jest --silent=false"
+  },
+  "dependencies": {
+    "apollo-server": "^3.6.6",
+    "apollo-server-express": "^3.6.4",
+    "apollo-server-testing": "^2.25.3",
+    "async": "^3.2.3",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-jwt": "^7.7.0",
+    "google-auth-library": "^8.0.1",
+    "graphql": "^16.3.0",
+    "graphql-merge-resolvers": "^1.1.16",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.7",
+    "node-notifier": "^10.0.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "eslint": "8.2.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "jest": "24.8.0",
+    "nodemon": "^2.0.15"
+  }
+}
